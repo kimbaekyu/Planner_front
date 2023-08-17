@@ -14,11 +14,13 @@ import ReadPost from './ReadPost';
 
 
 function Planner({onResponse}) {
-    
+  
   const [value, onChange] = useState(new Date());
   const [inputmodalIsVisible, setInputModalIsVisible] = useState(false);
   const [updatemodalIsVisible, setUpdateModalIsVisible] = useState(false);
   const [deletemodalIsVisible, setDeleteModalIsVisible] = useState(false);
+  
+  
   function showinputModalHandler(){
     setInputModalIsVisible(true);
   }
@@ -42,10 +44,8 @@ function Planner({onResponse}) {
   function hidedeleteModalHandler(){
     setDeleteModalIsVisible(false);
   }
-  const marks = [
-    "2023-08-03",
-    "2023-08-15"
-  ];
+  
+  const marks = [];
   
   const date = moment(value).format("YYYY-MM-DD") ;
   
@@ -60,22 +60,22 @@ function Planner({onResponse}) {
         value={value}
         formatDay={(locale, date) => moment(date).format("DD")} // 날'일' 제외하고 숫자만 보이도록 설정      
       
-        // tileContent={({ date, view }) => {
+        tileContent={({ date, view }) => {
 
-        //   let html = [];
-        //   if (marks.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
-        //     html.push(<div className="dot"></div>);
+          let html = [];
+          if (marks.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
+            html.push(<div className="dot"></div>);
             
-        //   }
-        //   // 다른 조건을 주어서 html.push 에 추가적인 html 태그를 적용할 수 있음.
-        //   return (
-        //       <>
-        //         <div className="flex justify-center items-center absoluteDiv">
-        //           {html}
-        //         </div>
-        //       </>
-        //   );
-        // }}
+          }
+          // 다른 조건을 주어서 html.push 에 추가적인 html 태그를 적용할 수 있음.
+          return (
+              <>
+                <div className="flex justify-center items-center absoluteDiv">
+                  {html}
+                </div>
+              </>
+          );
+        }}
         
       /> 
     </div>
@@ -114,7 +114,7 @@ function Planner({onResponse}) {
     }
      
    
-    {"선택된 날짜: "+date}
+    
     <ReadPost onResponse={onResponse} onDate={date}></ReadPost>
     {/* {moment(value).format("YYYY년 MM월 DD일")}  */}
     

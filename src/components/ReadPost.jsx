@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 //게이트웨이 내 aws계정과 연결됨 수정해야함
-function ReadPost() {
+import Planner from './Planner';
+function ReadPost({onDate}) {
   const [lambdaData, setLambdaData] = useState(null);
   const [data, setData] = useState([]);
   
+
+
   useEffect(() => {
     const fetchLambdaData = async () => {
       try {
@@ -44,20 +47,26 @@ function ReadPost() {
   function setClickHandler(){
     return console.log(JSON.stringify(lambdaData, null, 2));
   }
+  const dateList = data.map(item => item.date); // 날짜만 추출하여 리스트로 저장
+  // console.log("dataList: "+dateList);
+  // console.log(typeof(dateList));
+  // <Planner dateList={dateList}/>
   return (
     
     <div>
-      <button onClick={setClickHandler}>조회</button>
-      <h1>모든 일정</h1>
+      <button onClick={setClickHandler}>모든 일정 조회</button>
+      <h1>{onDate} 일정</h1>
       {/* {lambdaData && (
         <>
         <pre>{JSON.stringify(lambdaData, null, 2)}</pre>
         </>
       )} */}
       <ul>
-        {data.map((item, index) => (
+        {data
+          .filter(item => item.date === onDate) // 날짜가 일치하는 항목만 필터링
+          .map((item, index) => (
           <li key={index}>
-            Date: {item.date}
+            Title:{item.Title} Index:{index} Date: {item.date} EndDate:{item.EndDate} Memo:{item.Memo}
           </li>
         ))}
       </ul>
