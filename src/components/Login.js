@@ -55,6 +55,7 @@ const Login = () => {
       } else {
         console.error("API Error:", response.status, response.statusText);
         navigate('/');
+        <planner onResponse={response.headers}/>
       }
     } catch (error) {
       console.error("Failed to login", error);

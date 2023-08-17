@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import './Calendar.css';
@@ -14,7 +13,7 @@ import './CustumCalendar.css';
 import ReadPost from './ReadPost';
 
 
-function Planner() {
+function Planner({onResponse}) {
     
   const [value, onChange] = useState(new Date());
   const [inputmodalIsVisible, setInputModalIsVisible] = useState(false);
@@ -116,7 +115,7 @@ function Planner() {
      
    
     {"선택된 날짜: "+date}
-    <ReadPost onDate={date}></ReadPost>
+    <ReadPost onResponse={onResponse} onDate={date}></ReadPost>
     {/* {moment(value).format("YYYY년 MM월 DD일")}  */}
     
     </div>
