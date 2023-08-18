@@ -70,4 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 <Planner Front - planner부분만 내가 담당>
+- 일정이 존재하면 날짜 밑에 점으로 표시
+- 선택된 날짜에 일정 정보를 화면 밑에 표시
+- 입력, 수정, 삭제 버튼 메인헤더에 modal로 구현.
 ![화면 캡처 2023-08-18 105756](https://github.com/kimbaekyu/Planner_front/assets/80037923/39691db4-ad59-49f0-a05f-496e55e4c945)
