@@ -70,4 +70,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 <Planner Front - planner부분만 내가 담당>
-https://github.com/kimbaekyu/Planner_front/assets/80037923/4a3db178-07b2-405c-a733-24f3a2a49ee3
+![image](https://github.com/kimbaekyu/Planner_front/assets/80037923/4a3db178-07b2-405c-a733-24f3a2a49ee3)
