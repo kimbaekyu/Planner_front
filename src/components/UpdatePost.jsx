@@ -14,7 +14,7 @@ function UpdatePost({onCancel,onDate}) {
   var ID;
   var Title;
   var EndDate;
-  var memo;
+  var Memo;
   function dateChangeHandler(event) {
     setEnteredDate(event.target.value);
   }
@@ -41,7 +41,7 @@ function UpdatePost({onCancel,onDate}) {
       Title:enteredTitle,
       DATE: onDate,
       EndDate:enteredEndDate,
-      memo: enteredMemo
+      Memo: enteredMemo
     };
 
     console.log(postData);
@@ -69,7 +69,7 @@ function UpdatePost({onCancel,onDate}) {
       Title:enteredTitle,
       DATE: onDate,
       EndDate:enteredEndDate,
-      memo: enteredMemo
+      Memo: enteredMemo
       }),
     });
       
@@ -106,7 +106,7 @@ function UpdatePost({onCancel,onDate}) {
         <label htmlFor="enddate">End Date</label>
         <input type="text" id="enddate" required onChange={endDateChangeHandler}/>
       </p>
-      <label htmlFor="memo">memo</label>
+      <label htmlFor="memo">Memo</label>
         <textarea  id="memo" required rows={3}  onChange={memoChangeHandler}/>
       <p>
         

@@ -14,7 +14,7 @@ function NewPost({onCancel,onDate}) {
   var id;
   var Title;
   var EndDate;
-  var memo;
+  var Memo;
 
 
   function memoChangeHandler(event) {
@@ -42,7 +42,7 @@ function NewPost({onCancel,onDate}) {
       Title:enteredTitle,
       DATE: onDate,
       EndDate:enteredEndDate,
-      memo: enteredMemo
+      Memo: enteredMemo
     };
     console.log(postData);
     handlePutRequest();
@@ -69,7 +69,7 @@ function NewPost({onCancel,onDate}) {
         Title:enteredTitle,
         DATE: onDate,
         EndDate:enteredEndDate,
-        memo: enteredMemo
+        Memo: enteredMemo
         }),
       });
 
@@ -77,7 +77,7 @@ function NewPost({onCancel,onDate}) {
       console.log('POST response:', responseData);
       setResponseMessage(responseData.message);
     } catch (error) {
-      console.error('Error making PUT request:', error);
+      console.error('Error making Post request:', error);
     }
     
   
@@ -109,7 +109,7 @@ function NewPost({onCancel,onDate}) {
       <label htmlFor="enddate">End Date</label>
       <input type="text" id="enddate" required onChange={endDateChangeHandler}/>
     </p>
-    <label htmlFor="memo">memo</label>
+    <label htmlFor="memo">Memo</label>
       <textarea  id="memo" required rows={3}  onChange={memoChangeHandler}/>
     <p>
       

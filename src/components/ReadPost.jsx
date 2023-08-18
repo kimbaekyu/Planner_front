@@ -55,7 +55,7 @@ function ReadPost({onDate}) {
     
     <div>
       <button onClick={setClickHandler}>모든 일정 조회</button>
-      <h1>{onDate} 일정</h1>
+      <h3>{onDate} 일정</h3>
       {/* {lambdaData && (
         <>
         <pre>{JSON.stringify(lambdaData, null, 2)}</pre>
@@ -66,7 +66,7 @@ function ReadPost({onDate}) {
           .filter(item => item.date === onDate) // 날짜가 일치하는 항목만 필터링
           .map((item, index) => (
           <li key={index}>
-            Title:{item.Title} Index:{index} Date: {item.date} EndDate:{item.EndDate} Memo:{item.Memo}
+            Title:{item.Title} Date: {item.date} Index:{index} EndDate:{item.EndDate} Memo:{item.Memo}
           </li>
         ))}
       </ul>
