@@ -23,6 +23,7 @@ const Login = () => {
   const { authenticate } = useContext(AccountContext);
   const [accessToken, setAccessToken] = useState(""); // 토큰 상태 추가
   
+
   function usernameChangeHandler(event) {
     setUsername(event.target.value);
   }
@@ -131,6 +132,7 @@ const Login = () => {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    
     </>
   );
 };

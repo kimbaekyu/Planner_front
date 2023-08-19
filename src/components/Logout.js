@@ -1,5 +1,5 @@
 import classes from './NewPost.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate} from 'react-router-dom'; // useLocation 추가
 import AWS from 'aws-sdk';
 import {
@@ -12,9 +12,12 @@ import {
     MDBInput,
 } from "mdb-react-ui-kit";
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import SuccessModal from "./SuccessModal";
 
 function Logout({setId,setToken}) {
     const [responseMessage, setResponseMessage] = useState('');
+    const [showSuccessModal, setShowSuccessModal] = useState(false); // 모달 상태 추가
+
     const location = useLocation(); // useLocation 훅 사용
     
     const navigate = useNavigate(); //라우팅 전환 객체
@@ -27,9 +30,9 @@ function Logout({setId,setToken}) {
     function setWithdrawalHandler(event){
         event.preventDefault();
         handleDeleteRequest();
+        
     }
-    // console.log("setToken",setToken);
-    // console.log("setId",setId);
+    
 
   const handlePostRequest = async (event) => {
       
@@ -83,9 +86,14 @@ function Logout({setId,setToken}) {
       });
 
     if (response.ok) {
-      // 회원탈퇴 성공 후 다른 페이지로 이동 값 전달
+      
       console.log(response);
-      navigate('/');
+      setShowSuccessModal(true); // 성공하면 모달 열기
+      // 회원탈퇴 성공 후 다른 페이지로 이동
+      // 일정 시간 후에 라우팅 실행
+      setTimeout(() => {
+        navigate('/');
+      }, 3000); // 3초 후에 라우팅 실행
     } else {
       console.error("API Error:", response.status, response.statusText);
     }
@@ -102,7 +110,17 @@ function Logout({setId,setToken}) {
  
   
 };
-  
+  useEffect(() => {
+  // 3초 후에 모달 닫기
+    const timer = setTimeout(() => {
+      setShowSuccessModal(false);
+    }, 3000);
+
+  return () => {
+      clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머 클리어
+  };
+  }, [showSuccessModal]);
+
   return (
     
         <div>
@@ -114,8 +132,10 @@ function Logout({setId,setToken}) {
                 </Col>
             </Row>
             </Container>
+           {/* SuccessModal 띄우기 */}
+           <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} setText="Membership withdrawal successful!" />
         </div>   
-    
+
 
          
         

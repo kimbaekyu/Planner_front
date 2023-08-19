@@ -124,7 +124,7 @@ function Planner() {
       /> 
     </div>
     
-    {/* 일정 확인 창 */}
+    
     <div className="text-gray-500 mt-4">
     
     

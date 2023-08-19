@@ -87,7 +87,7 @@ function NewPost({onCancel,onDate, setId, setToken}) {
     
   
     
-    // console.log({setId});
+    
     
   };
 
