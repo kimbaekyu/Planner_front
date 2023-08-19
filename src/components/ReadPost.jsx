@@ -6,26 +6,26 @@ function ReadPost({onDate,setId, setToken}) {
   const [data, setData] = useState([]);
   
 
-
   useEffect(() => {
     const fetchLambdaData = async () => {
       try {
-        const token = setToken;
+        
         const lambdaEndpoint = "https://28ficn77c1.execute-api.ap-northeast-2.amazonaws.com/test/planner";
+        
         const response = await fetch(lambdaEndpoint, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`, // 토큰을 "Bearer" 스타일로 전달
+            'Authorization': `Bearer ${setToken}`, // 토큰을 "Bearer" 스타일로 전달
           },
         }) 
         
-       
-        
-        
         const jsonData = await response.json();
+            
         // 받아온 JSON 데이터의 body 부분을 출력합니다.
         setLambdaData(jsonData.body);
+        console.table(typeof jsonData);
+        
         if (Array.isArray(jsonData.body)) {
           setData(jsonData.body);
         } else {
@@ -42,7 +42,7 @@ function ReadPost({onDate,setId, setToken}) {
   function setClickHandler(){
     return console.log(JSON.stringify(lambdaData, null, 2));
   }
-  const dateList = data.map(item => item.date); // 날짜만 추출하여 리스트로 저장
+  const dateList = data.map(item => item.DATE); // 날짜만 추출하여 리스트로 저장
  
   return (
     
@@ -56,7 +56,7 @@ function ReadPost({onDate,setId, setToken}) {
           .filter(item => item.DATE === onDate) // 날짜가 일치하는 항목만 필터링
           .map((item, index) => (
           <li key={index}>
-            index:{index} Title:{item.Title} Date: {item.date} EndDate:{item.EndDate} Memo:{item.Memo}
+            index:{index} Title:{item.Title} Date: {item.DATE} EndDate:{item.EndDate} Memo:{item.Memo}
           </li>
         ))}
       </ul>

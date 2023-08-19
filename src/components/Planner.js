@@ -62,7 +62,7 @@ function Planner() {
     const fetchLambdaData = async () => {
       try {
         const token = setToken;
-        const lambdaEndpoint = "https://zie1snhqwd.execute-api.ap-northeast-2.amazonaws.com/test";
+        const lambdaEndpoint = "https://28ficn77c1.execute-api.ap-northeast-2.amazonaws.com/test/planner";
         const response = await fetch(lambdaEndpoint, {
           method: 'GET',
           headers: {
@@ -89,7 +89,7 @@ function Planner() {
   
   const dateList = data
                     .filter(item => item.ID === userId) // 닉네임이 일치하는 항목만 필터링
-                    .map(item => item.date); // 날짜만 추출하여 리스트로 저장
+                    .map(item => item.DATE); // 날짜만 추출하여 리스트로 저장
                    
   const date = moment(value).format("YYYY-MM-DD") ;
   
