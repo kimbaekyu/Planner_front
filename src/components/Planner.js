@@ -12,7 +12,7 @@ import DeletePost from './DeletePost';
 import './CustumCalendar.css';
 import ReadPost from './ReadPost';
 import Logout from './Logout';
-
+import InfoModal from './InfoModal';
 import { useLocation } from 'react-router-dom'; // useLocation 추가
 
 function Planner() {
@@ -23,8 +23,11 @@ function Planner() {
   const [updatemodalIsVisible, setUpdateModalIsVisible] = useState(false);
   const [deletemodalIsVisible, setDeleteModalIsVisible] = useState(false);
   const [data, setData] = useState([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [infoData, setinfoData] = useState(false);
+  
+  let informationList;
 
- 
   // 1. useLocation 훅 취득
   const location = useLocation();
 
@@ -56,7 +59,21 @@ function Planner() {
   function hidedeleteModalHandler(){
     setDeleteModalIsVisible(false);
   }
-  
+  //모든일정조회 버튼핸들러
+  function setClickHandler(){     
+    informationList = data
+                        .filter((item) => item.ID === userId)
+                        .map(item => item); // 날짜만 추출하여 리스트로 저장
+
+
+
+    // SuccessModal 띄우기
+    setShowSuccessModal(true);
+
+    setinfoData(informationList);
+    console.log(infoData);
+    
+  }
   
   useEffect(() => {
     const fetchLambdaData = async () => {
@@ -87,16 +104,20 @@ function Planner() {
     fetchLambdaData();
   }, []);
   
+  //시작날짜 리스트
   const dateList = data
                     .filter(item => item.ID === userId) // 닉네임이 일치하는 항목만 필터링
                     .map(item => item.DATE); // 날짜만 추출하여 리스트로 저장
-                   
+                    
+
   const date = moment(value).format("YYYY-MM-DD") ;
   
   return (
     <>
     <Logout setId={userId} setToken={setToken} />  {/*Logout 컴포넌트에 토큰 전달 */}
     <MainHeader onInputPost={showinputModalHandler} onUpdatePost={showupdateModalHandler} onDeletePost={showdeleteModalHandler}></MainHeader>
+    
+    
     
     <div className="calendar-container">
       <Calendar
@@ -109,7 +130,6 @@ function Planner() {
           let html = [];
           if (dateList.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
             html.push(<div className="dot"></div>);
-            
           }
           // 다른 조건을 주어서 html.push 에 추가적인 html 태그를 적용할 수 있음.
           return (
@@ -123,8 +143,11 @@ function Planner() {
         
       /> 
     </div>
-    
-    
+    {/* 모든일정조회 버튼 */}
+    <div className="d-flex justify-content-start">
+      <button onClick={setClickHandler} type="button" class="btn btn-secondary btn-lg ms-5">모든 일정 조회</button>
+    </div>
+    <InfoModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} infoData={infoData}></InfoModal>
     <div className="text-gray-500 mt-4">
     
     
@@ -156,7 +179,7 @@ function Planner() {
     </Modal>
     :null
     }
-     
+ 
    
     
     <ReadPost onDate={date} setId={userId} setToken={setToken}></ReadPost>
